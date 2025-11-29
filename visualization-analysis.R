@@ -20,10 +20,19 @@ colnames(X2016)[7] <- "GDP"
 
 Cleaned_Happiness <- na.omit(X2016$Happiness)
 print(head(Cleaned_Happiness))
+
+breaks <- seq(floor(min(Cleaned_Happiness)),
+              ceiling(max(Cleaned_Happiness)),
+              by = 0.5)
+
 hist(Cleaned_Happiness,
      freq = FALSE,
      main = "Histogram of Happiness Scores",
-     xlab = "Happiness Score")
+     xlab = "Happiness Score",
+     breaks = breaks,
+     ylim = c(0, 0.35),      
+     xlim = c(2, 8), 
+     border="black")
 m <- mean(Cleaned_Happiness)
 s <- sd(Cleaned_Happiness)
 
