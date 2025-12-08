@@ -7,10 +7,9 @@ colnames(X2016)[7] <- "GDP"
 
 #cleaning happiness null values in the dataset to reduce the errors
 
-Cleaned_Happiness <- na.omit(X2016$Happiness)
-Cleaned_GDP <- na.omit(X2016$GDP)
-print(length(Cleaned_GDP))
-
+Cleaned <- na.omit(X2016[, c("Happiness", "GDP")])
+Cleaned_Happiness <- Cleaned$Happiness
+Cleaned_GDP <- Cleaned$GDP
 
 # Happiness histogram
 breaks <- seq(floor(min(Cleaned_Happiness)),
@@ -23,8 +22,8 @@ hist(Cleaned_Happiness,
      xlab = "Happiness Score",
      breaks = breaks,
      ylim = c(0, 0.35),      
-     xlim = c(2, 8), 
-     border="black")
+     xlim = c(2, 8),
+     col = "lightgrey",)
 
 m <- mean(Cleaned_Happiness)
 print("mean of happiness")
@@ -44,14 +43,14 @@ plot(Cleaned_GDP,
      xlab = "Economy (GDP per Capita)",
      ylab = "Happiness Score",
      pch = 19,
-     col = "grey")
+     col = "grey",
+     )
 
 abline(
   lm(Cleaned_Happiness ~ Cleaned_GDP),
-  col = "red",
+  col = "blue",
   lwd = 2
 )
-
 #corelation test pearson
 result <- cor.test(
   Cleaned_Happiness,
@@ -60,3 +59,9 @@ result <- cor.test(
 )
 
 print(result)
+
+#creating graph for GDP
+hist(Cleaned_GDP,
+     main = "Histogram of GDP per Capita",
+     xlab = "GDP per Capita",
+     col  = "lightgrey",)
